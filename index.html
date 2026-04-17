@@ -7,362 +7,251 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #f5f4f0;
-      --surface: #ffffff;
-      --surface2: #f0ede8;
-      --text: #1a1a18;
-      --text2: #5f5e5a;
-      --text3: #888780;
-      --border: rgba(0,0,0,0.10);
-      --border2: rgba(0,0,0,0.18);
-      --green: #2e7d32;
-      --red: #c62828;
-      --radius: 12px;
-      --radius-sm: 8px;
+      --bg: #f5f4f0; --surface: #ffffff; --surface2: #f0ede8;
+      --text: #1a1a18; --text2: #5f5e5a; --text3: #888780;
+      --border: rgba(0,0,0,0.10); --border2: rgba(0,0,0,0.18);
+      --green: #2e7d32; --red: #c62828; --radius: 12px; --radius-sm: 8px;
     }
     @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1a1a18;
-        --surface: #242422;
-        --surface2: #2e2e2b;
-        --text: #f0ede6;
-        --text2: #a8a69f;
-        --text3: #6e6d68;
-        --border: rgba(255,255,255,0.08);
-        --border2: rgba(255,255,255,0.16);
-      }
+      :root { --bg:#1a1a18; --surface:#242422; --surface2:#2e2e2b; --text:#f0ede6; --text2:#a8a69f; --text3:#6e6d68; --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.16); }
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem; }
-    .container { max-width: 980px; margin: 0 auto; }
-
-    .key-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; gap: 1rem; }
-    .key-screen h2 { font-size: 22px; font-weight: 500; }
-    .key-screen p { font-size: 14px; color: var(--text2); max-width: 440px; line-height: 1.6; }
-    .key-screen a { color: #1565c0; }
-    .key-input-row { display: flex; gap: 8px; width: 100%; max-width: 500px; }
-    .key-input-row input { flex: 1; padding: 10px 14px; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font-size: 13px; font-family: monospace; }
-    .key-input-row input:focus { outline: none; border-color: #1565c0; }
-    .btn { padding: 10px 20px; border: none; border-radius: var(--radius-sm); background: #1565c0; color: #fff; font-size: 13px; cursor: pointer; }
-    .btn:hover { background: #0d47a1; }
-    .key-note { font-size: 11px; color: var(--text3); }
-    .key-error { font-size: 12px; color: var(--red); min-height: 16px; }
-
-    .dashboard { display: none; }
-    .top-bar { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
-    .header h1 { font-size: 20px; font-weight: 500; }
-    .header p { font-size: 13px; color: var(--text2); margin-top: 3px; }
-    .top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-    .refresh-btn { font-size: 12px; color: var(--text2); background: none; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); padding: 5px 12px; cursor: pointer; }
-    .refresh-btn:hover { background: var(--surface2); }
-    .change-key-btn { font-size: 12px; color: var(--text3); background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0; }
-
-    .status-bar { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); margin-bottom: 1.25rem; }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-    .dot.loading { background: #f9a825; animation: pulse 1s infinite; }
-    .dot.error { background: var(--red); }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:2rem 1rem; }
+    .container { max-width:980px; margin:0 auto; }
+    .key-screen { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; text-align:center; gap:1rem; }
+    .key-screen h2 { font-size:22px; font-weight:500; }
+    .key-screen p { font-size:14px; color:var(--text2); max-width:440px; line-height:1.6; }
+    .key-screen a { color:#1565c0; }
+    .key-input-row { display:flex; gap:8px; width:100%; max-width:500px; }
+    .key-input-row input { flex:1; padding:10px 14px; border:0.5px solid var(--border2); border-radius:var(--radius-sm); background:var(--surface); color:var(--text); font-size:13px; font-family:monospace; }
+    .key-input-row input:focus { outline:none; border-color:#1565c0; }
+    .btn { padding:10px 20px; border:none; border-radius:var(--radius-sm); background:#1565c0; color:#fff; font-size:13px; cursor:pointer; }
+    .btn:hover { background:#0d47a1; }
+    .key-note { font-size:11px; color:var(--text3); max-width:440px; line-height:1.6; }
+    .key-error { font-size:12px; color:var(--red); min-height:16px; }
+    .dashboard { display:none; }
+    .top-bar { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:1.25rem; }
+    .header h1 { font-size:20px; font-weight:500; }
+    .header p { font-size:13px; color:var(--text2); margin-top:3px; }
+    .top-actions { display:flex; gap:8px; align-items:center; }
+    .refresh-btn { font-size:12px; color:var(--text2); background:none; border:0.5px solid var(--border2); border-radius:var(--radius-sm); padding:5px 12px; cursor:pointer; }
+    .refresh-btn:hover { background:var(--surface2); }
+    .change-key-btn { font-size:12px; color:var(--text3); background:none; border:none; cursor:pointer; text-decoration:underline; padding:0; }
+    .status-bar { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text2); margin-bottom:1.25rem; }
+    .dot { width:7px; height:7px; border-radius:50%; background:var(--green); flex-shrink:0; }
+    .dot.loading { background:#f9a825; animation:pulse 1s infinite; }
+    .dot.error { background:var(--red); }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-    .legend { display: flex; gap: 16px; font-size: 11px; color: var(--text3); margin-bottom: 1rem; flex-wrap: wrap; }
-    .legend span { display: flex; align-items: center; gap: 5px; }
-    .ldot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-
-    .section-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin: 1.5rem 0 0.65rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
-
-    .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 15px 16px; text-decoration: none; display: block; color: inherit; transition: border-color 0.15s; }
-    .card:hover { border-color: var(--border2); }
-    .badge { font-size: 10px; padding: 2px 7px; border-radius: 4px; display: inline-block; margin-bottom: 7px; font-weight: 500; }
-    .b-growth   { background: #e8f5e9; color: #1b5e20; }
-    .b-risk     { background: #fff3e0; color: #e65100; }
-    .b-rates    { background: #e3f2fd; color: #0d47a1; }
-    .b-consumer { background: #f3e5f5; color: #4a148c; }
+    .legend { display:flex; gap:16px; font-size:11px; color:var(--text3); margin-bottom:1rem; flex-wrap:wrap; }
+    .legend span { display:flex; align-items:center; gap:5px; }
+    .ldot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .section-label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:0.07em; margin:1.5rem 0 0.65rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; }
+    .card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--radius); padding:15px 16px; text-decoration:none; display:block; color:inherit; transition:border-color 0.15s; }
+    .card:hover { border-color:var(--border2); }
+    .badge { font-size:10px; padding:2px 7px; border-radius:4px; display:inline-block; margin-bottom:7px; font-weight:500; }
+    .b-growth { background:#e8f5e9; color:#1b5e20; }
+    .b-risk   { background:#fff3e0; color:#e65100; }
+    .b-rates  { background:#e3f2fd; color:#0d47a1; }
+    .b-consumer { background:#f3e5f5; color:#4a148c; }
     @media (prefers-color-scheme: dark) {
-      .b-growth   { background: #0a2010; color: #81c784; }
-      .b-risk     { background: #2a1500; color: #ffb74d; }
-      .b-rates    { background: #051525; color: #64b5f6; }
-      .b-consumer { background: #15052a; color: #ce93d8; }
+      .b-growth { background:#0a2010; color:#81c784; }
+      .b-risk   { background:#2a1500; color:#ffb74d; }
+      .b-rates  { background:#051525; color:#64b5f6; }
+      .b-consumer { background:#15052a; color:#ce93d8; }
     }
-    .card-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
-    .card-value { font-size: 26px; font-weight: 500; line-height: 1.1; }
-    .card-period { font-size: 11px; color: var(--text3); margin-top: 3px; }
-    .card-change { font-size: 12px; font-weight: 500; margin-top: 8px; }
-    .up   { color: var(--green); }
-    .down { color: var(--red); }
-    .flat { color: var(--text3); }
-
-    .skeleton { background: var(--surface2); border-radius: 4px; animation: shimmer 1.3s infinite; }
+    .card-label  { font-size:11px; color:var(--text2); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:5px; }
+    .card-value  { font-size:26px; font-weight:500; line-height:1.1; }
+    .card-period { font-size:11px; color:var(--text3); margin-top:3px; }
+    .card-change { font-size:12px; font-weight:500; margin-top:8px; }
+    .up   { color:var(--green); }
+    .down { color:var(--red); }
+    .flat { color:var(--text3); }
+    .skeleton { background:var(--surface2); border-radius:4px; animation:shimmer 1.3s infinite; }
     @keyframes shimmer { 0%,100%{opacity:0.4} 50%{opacity:0.9} }
-
-    .footer { font-size: 11px; color: var(--text3); margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid var(--border); line-height: 1.7; }
-    .footer a { color: var(--text3); }
+    .footer { font-size:11px; color:var(--text3); margin-top:2rem; padding-top:1rem; border-top:0.5px solid var(--border); line-height:1.7; }
+    .footer a { color:var(--text3); }
   </style>
 </head>
 <body>
 <div class="container">
 
   <div class="key-screen" id="key-screen">
-    <div style="font-size:36px;">📊</div>
+    <div style="font-size:36px">📊</div>
     <h2>Macro Economic Dashboard</h2>
-    <p>Powered by <strong>FRED</strong> — the Federal Reserve's free economic data service. Enter your free FRED API key to load live U.S. macro indicators.</p>
-    <p>No key yet? <a href="https://fred.stlouisfed.org/docs/api/api_key.html" target="_blank" rel="noopener">Get one free here</a> — no credit card, takes 30 seconds.</p>
+    <p>Enter your <strong>Anthropic API key</strong> to load live U.S. macro indicators. Your key is saved in your browser — never sent anywhere except Anthropic.</p>
+    <p>Get a free key at <a href="https://console.anthropic.com/account/keys" target="_blank">console.anthropic.com</a> (requires adding a small credit balance — separate from Claude.ai Pro).</p>
     <div class="key-input-row">
-      <input type="text" id="api-key-input" placeholder="Paste your FRED API key..." />
+      <input type="password" id="api-key-input" placeholder="sk-ant-..." />
       <button class="btn" onclick="submitKey()">Load</button>
     </div>
     <div class="key-error" id="key-error"></div>
-    <div class="key-note">Your key is saved locally in your browser — never sent anywhere except FRED.</div>
+    <div class="key-note">Your key is stored only in your browser's localStorage. It is never logged or shared.</div>
   </div>
 
   <div class="dashboard" id="dashboard">
     <div class="top-bar">
       <div class="header">
         <h1>Macro Economic Dashboard</h1>
-        <p>Top 10 U.S. indicators — live data from FRED</p>
+        <p>Top 10 U.S. indicators — live data via AI</p>
       </div>
       <div class="top-actions">
         <button class="change-key-btn" onclick="changeKey()">Change API key</button>
         <button class="refresh-btn" onclick="loadAll()">↻ Refresh</button>
       </div>
     </div>
-
     <div class="status-bar">
       <span class="dot loading" id="status-dot"></span>
       <span id="status-text">Loading indicators...</span>
     </div>
-
     <div class="legend">
-      <span><span class="ldot" style="background:var(--green)"></span>Better than prior reading</span>
-      <span><span class="ldot" style="background:var(--red)"></span>Worse than prior reading</span>
+      <span><span class="ldot" style="background:var(--green)"></span>Better than prior</span>
+      <span><span class="ldot" style="background:var(--red)"></span>Worse than prior</span>
       <span><span class="ldot" style="background:#888"></span>Unchanged</span>
     </div>
-
-    <div class="section-label">Growth &amp; Output</div>
-    <div class="grid" id="grid-growth"></div>
-
-    <div class="section-label">Inflation &amp; Rates</div>
-    <div class="grid" id="grid-rates"></div>
-
-    <div class="section-label">Labor &amp; Consumer</div>
-    <div class="grid" id="grid-labor"></div>
-
-    <div class="section-label">Markets &amp; Sentiment</div>
-    <div class="grid" id="grid-markets"></div>
-
-    <div class="footer" id="footer">
-      Data from <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED® Federal Reserve Bank of St. Louis</a>.
-      Click any card to view the full series. Not financial advice.
-    </div>
+    <div class="section-label">Growth &amp; Output</div><div class="grid" id="grid-growth"></div>
+    <div class="section-label">Inflation &amp; Rates</div><div class="grid" id="grid-rates"></div>
+    <div class="section-label">Labor &amp; Consumer</div><div class="grid" id="grid-labor"></div>
+    <div class="section-label">Markets &amp; Sentiment</div><div class="grid" id="grid-markets"></div>
+    <div class="footer">Data sourced via AI knowledge. Click any card to view the official source. Not financial advice. <span id="last-updated"></span></div>
   </div>
 
 </div>
 <script>
-const INDICATORS = [
-  { id:"gdp",      label:"GDP Growth",            badge:"b-growth",   section:"growth",  series:"A191RL1Q225SBEA", unit:"%",     decimals:1, desc:"Real GDP, annualized",        url:"https://fred.stlouisfed.org/series/A191RL1Q225SBEA", invertGood:false, computeYoY:false, computeDiff:false },
-  { id:"indpro",   label:"Industrial Production", badge:"b-growth",   section:"growth",  series:"INDPRO",          unit:"index", decimals:1, desc:"Index (2017=100)",            url:"https://fred.stlouisfed.org/series/INDPRO",          invertGood:false, computeYoY:false, computeDiff:false },
-  { id:"cpi",      label:"CPI Inflation",         badge:"b-risk",     section:"rates",   series:"CPIAUCSL",        unit:"%",     decimals:1, desc:"Year-over-year",             url:"https://fred.stlouisfed.org/series/CPIAUCSL",        invertGood:true,  computeYoY:true,  computeDiff:false },
-  { id:"t10y",     label:"10-Yr Treasury",        badge:"b-rates",    section:"rates",   series:"GS10",            unit:"%",     decimals:2, desc:"Yield, monthly avg",         url:"https://fred.stlouisfed.org/series/GS10",            invertGood:false, computeYoY:false, computeDiff:false },
-  { id:"fedfunds", label:"Fed Funds Rate",        badge:"b-risk",     section:"rates",   series:"FEDFUNDS",        unit:"%",     decimals:2, desc:"Effective rate",             url:"https://fred.stlouisfed.org/series/FEDFUNDS",        invertGood:false, computeYoY:false, computeDiff:false },
-  { id:"unemp",    label:"Unemployment Rate",     badge:"b-consumer", section:"labor",   series:"UNRATE",          unit:"%",     decimals:1, desc:"U-3 unemployment",           url:"https://fred.stlouisfed.org/series/UNRATE",          invertGood:true,  computeYoY:false, computeDiff:false },
-  { id:"nfp",      label:"Nonfarm Payrolls",      badge:"b-growth",   section:"labor",   series:"PAYEMS",          unit:"K",     decimals:0, desc:"Monthly change (thousands)", url:"https://fred.stlouisfed.org/series/PAYEMS",          invertGood:false, computeYoY:false, computeDiff:true  },
-  { id:"umich",    label:"Consumer Sentiment",    badge:"b-consumer", section:"labor",   series:"UMCSENT",         unit:"index", decimals:1, desc:"U of Michigan index",        url:"https://fred.stlouisfed.org/series/UMCSENT",         invertGood:false, computeYoY:false, computeDiff:false },
-  { id:"ism",      label:"Philly Fed Mfg Index",  badge:"b-growth",   section:"markets", series:"GACDISA066MSFRBPHI", unit:"index", decimals:1, desc:">0 = expansion",           url:"https://fred.stlouisfed.org/series/GACDISA066MSFRBPHI", invertGood:false, computeYoY:false, computeDiff:false },
-  { id:"vix",      label:"VIX",                  badge:"b-risk",     section:"markets", series:"VIXCLS",          unit:"index", decimals:1, desc:"CBOE Volatility Index",      url:"https://fred.stlouisfed.org/series/VIXCLS",          invertGood:true,  computeYoY:false, computeDiff:false }
+var INDICATORS = [
+  {id:"gdp",      label:"GDP Growth",           badge:"b-growth",   section:"growth",  inv:false, url:"https://www.bea.gov/data/gdp/gross-domestic-product",         unit:"%",     dec:1, prompt:"Latest U.S. real GDP annualized growth rate and prior quarter rate. JSON only, no markdown: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"%\"}"},
+  {id:"indpro",   label:"Industrial Production",badge:"b-growth",   section:"growth",  inv:false, url:"https://www.federalreserve.gov/releases/g17/",                unit:"index", dec:1, prompt:"Latest U.S. Industrial Production Index level and prior month level. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"index\"}"},
+  {id:"cpi",      label:"CPI Inflation (YoY)",  badge:"b-risk",     section:"rates",   inv:true,  url:"https://www.bls.gov/cpi/",                                    unit:"%",     dec:1, prompt:"Latest U.S. CPI year-over-year inflation rate and prior month rate. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"%\"}"},
+  {id:"t10y",     label:"10-Yr Treasury",       badge:"b-rates",    section:"rates",   inv:false, url:"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/", unit:"%", dec:2, prompt:"Current U.S. 10-year Treasury yield and prior month yield. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"%\"}"},
+  {id:"fedfunds", label:"Fed Funds Rate",       badge:"b-risk",     section:"rates",   inv:false, url:"https://www.federalreserve.gov/monetarypolicy/openmarket.htm", unit:"%",     dec:2, prompt:"Current U.S. Federal Funds target rate and prior rate. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"%\"}"},
+  {id:"unemp",    label:"Unemployment Rate",    badge:"b-consumer", section:"labor",   inv:true,  url:"https://www.bls.gov/news.release/empsit.nr0.htm",             unit:"%",     dec:1, prompt:"Latest U.S. unemployment rate and prior month rate. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"%\"}"},
+  {id:"nfp",      label:"Nonfarm Payrolls",     badge:"b-growth",   section:"labor",   inv:false, url:"https://www.bls.gov/news.release/empsit.nr0.htm",             unit:"K",     dec:0, prompt:"Latest U.S. nonfarm payrolls monthly change in thousands and prior month change. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"K\"}"},
+  {id:"umich",    label:"Consumer Sentiment",   badge:"b-consumer", section:"labor",   inv:false, url:"https://data.sca.isr.umich.edu/",                             unit:"index", dec:1, prompt:"Latest University of Michigan Consumer Sentiment index value and prior month. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"index\"}"},
+  {id:"ism",      label:"ISM Mfg PMI",          badge:"b-growth",   section:"markets", inv:false, url:"https://www.ismworld.org/supply-management-news-and-reports/reports/ism-pmi-reports/", unit:"index", dec:1, prompt:"Latest ISM Manufacturing PMI value and prior month. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"index\"}"},
+  {id:"vix",      label:"VIX",                 badge:"b-risk",     section:"markets", inv:true,  url:"https://www.cboe.com/tradable_products/vix/",                 unit:"index", dec:1, prompt:"Latest CBOE VIX closing value and prior week value. JSON only: {\"value\":number,\"prior\":number,\"period\":\"MMM YYYY\",\"unit\":\"index\"}"}
 ];
 
-const SECTIONS = { growth:"grid-growth", rates:"grid-rates", labor:"grid-labor", markets:"grid-markets" };
-let FRED_KEY = "";
+var SECTIONS = {growth:"grid-growth",rates:"grid-rates",labor:"grid-labor",markets:"grid-markets"};
+var API_KEY = "";
 
 function submitKey() {
-  const val = document.getElementById("api-key-input").value.trim();
-  if (!val || val.length < 8) {
-    document.getElementById("key-error").textContent = "Please enter a valid FRED API key.";
-    return;
-  }
-  FRED_KEY = val;
-  try { localStorage.setItem("fred_api_key", val); } catch(e) {}
+  var val = document.getElementById("api-key-input").value.trim();
+  if (!val || !val.startsWith("sk-")) { document.getElementById("key-error").textContent = "Please enter a valid Anthropic API key (starts with sk-)."; return; }
+  API_KEY = val;
+  try { localStorage.setItem("anthro_key", val); } catch(e) {}
   document.getElementById("key-screen").style.display = "none";
   document.getElementById("dashboard").style.display = "block";
   loadAll();
 }
 
 function changeKey() {
-  try { localStorage.removeItem("fred_api_key"); } catch(e) {}
-  FRED_KEY = "";
+  try { localStorage.removeItem("anthro_key"); } catch(e) {}
+  API_KEY = "";
   document.getElementById("key-screen").style.display = "flex";
   document.getElementById("dashboard").style.display = "none";
   document.getElementById("api-key-input").value = "";
   document.getElementById("key-error").textContent = "";
 }
 
-function fetchSeries(seriesId, limit) {
-  return new Promise(function(resolve, reject) {
-    var callbackName = "fredcb_" + seriesId + "_" + Date.now();
-    var script = document.createElement("script");
-    var timer = setTimeout(function() {
-      cleanup();
-      reject(new Error("Timeout fetching " + seriesId));
-    }, 15000);
-
-    function cleanup() {
-      clearTimeout(timer);
-      delete window[callbackName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    }
-
-    window[callbackName] = function(data) {
-      cleanup();
-      if (data.error_message) { reject(new Error(data.error_message)); return; }
-      var obs = (data.observations || []).filter(function(o){ return o.value !== "."; });
-      resolve(obs);
-    };
-
-    script.src = "https://api.stlouisfed.org/fred/series/observations"
-      + "?series_id=" + seriesId
-      + "&api_key=" + FRED_KEY
-      + "&file_type=json&sort_order=desc&limit=" + limit
-      + "&observation_start=2018-01-01"
-      + "&callback=" + callbackName;
-    script.onerror = function() { cleanup(); reject(new Error("Script load failed for " + seriesId)); };
-    document.head.appendChild(script);
-  });
+function skeletonCard() {
+  return '<div class="card" style="pointer-events:none">'
+    +'<div class="skeleton" style="height:10px;width:55%;margin-bottom:10px"></div>'
+    +'<div class="skeleton" style="height:26px;width:65%;margin-bottom:8px"></div>'
+    +'<div class="skeleton" style="height:10px;width:40%"></div></div>';
 }
 
-async function fetchIndicator(ind) {
-  if (ind.computeYoY) {
-    const obs = await fetchSeries(ind.series, 15);
-    if (obs.length < 13) throw new Error("Not enough data");
-    const curr  = parseFloat(obs[0].value);
-    const prev  = parseFloat(obs[1].value);
-    const ya    = parseFloat(obs[12].value);
-    const ya2   = obs[13] ? parseFloat(obs[13].value) : ya;
-    const yoy      = ((curr - ya)  / Math.abs(ya))  * 100;
-    const yoyPrior = ((prev - ya2) / Math.abs(ya2)) * 100;
-    return { value: yoy, prior: yoyPrior, period: obs[0].date };
-  }
-  if (ind.computeDiff) {
-    const obs = await fetchSeries(ind.series, 3);
-    if (obs.length < 3) throw new Error("Not enough data");
-    const curr  = parseFloat(obs[0].value);
-    const prev  = parseFloat(obs[1].value);
-    const prev2 = parseFloat(obs[2].value);
-    return { value: curr - prev, prior: prev - prev2, period: obs[0].date };
-  }
-  const obs = await fetchSeries(ind.series, 2);
-  if (obs.length < 2) throw new Error("Not enough data");
-  return { value: parseFloat(obs[0].value), prior: parseFloat(obs[1].value), period: obs[0].date };
-}
-
-function formatPeriod(dateStr) {
-  if (!dateStr) return "";
-  const d = new Date(dateStr + "T00:00:00");
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-}
-
-function formatValue(val, ind) {
+function formatVal(val, ind) {
   if (isNaN(val)) return "—";
   if (ind.id === "nfp") return (val >= 0 ? "+" : "") + Math.round(val).toLocaleString() + "K";
-  if (ind.unit === "%") return val.toFixed(ind.decimals) + "%";
-  return val.toFixed(ind.decimals);
+  if (ind.unit === "%") return val.toFixed(ind.dec) + "%";
+  return val.toFixed(ind.dec);
 }
 
 function changeInfo(val, prior, ind) {
-  const diff = val - prior;
-  const inv  = ind.invertGood;
-  var cls = "flat";
-  if (Math.abs(diff) > 0.001) cls = ((diff > 0) === !inv) ? "up" : "down";
-  const arrow = diff > 0 ? "▲ +" : diff < 0 ? "▼ " : "";
-  var diffStr;
-  if (ind.id === "nfp") diffStr = Math.round(Math.abs(diff)).toLocaleString() + "K vs prior";
-  else if (ind.unit === "%") diffStr = Math.abs(diff).toFixed(ind.decimals) + "pp vs prior";
-  else diffStr = Math.abs(diff).toFixed(ind.decimals) + " vs prior";
-  return { cls: cls, label: arrow + diffStr };
-}
-
-function skeletonCard() {
-  return '<div class="card" style="pointer-events:none">'
-    + '<div class="skeleton" style="height:10px;width:55%;margin-bottom:10px;"></div>'
-    + '<div class="skeleton" style="height:28px;width:65%;margin-bottom:8px;"></div>'
-    + '<div class="skeleton" style="height:10px;width:40%;"></div>'
-    + '</div>';
+  var diff = val - prior;
+  var cls  = Math.abs(diff) < 0.001 ? "flat" : ((diff > 0) === !ind.inv ? "up" : "down");
+  var arrow = diff > 0 ? "▲ +" : diff < 0 ? "▼ " : "";
+  var s = ind.id === "nfp" ? Math.round(Math.abs(diff)).toLocaleString() + "K vs prior"
+        : ind.unit === "%" ? Math.abs(diff).toFixed(ind.dec) + "pp vs prior"
+        : Math.abs(diff).toFixed(ind.dec) + " vs prior";
+  return {cls: cls, label: arrow + s};
 }
 
 function renderCard(ind, result) {
-  var badge = '<span class="badge ' + ind.badge + '">' + ind.desc + '</span>';
+  var badge = '<span class="badge ' + ind.badge + '">' + ind.label + '</span>';
   if (!result || result.err) {
-    var msg = (result && result.msg) ? result.msg : "Failed to load";
     return '<a class="card" href="' + ind.url + '" target="_blank" rel="noopener">'
-      + badge
-      + '<div class="card-label">' + ind.label + '</div>'
-      + '<div class="card-value" style="font-size:15px;color:var(--text2);">Unavailable</div>'
-      + '<div class="card-period" style="color:var(--red);font-size:10px;">' + msg + '</div>'
-      + '</a>';
+      + badge + '<div class="card-label">' + ind.label + '</div>'
+      + '<div class="card-value" style="font-size:14px;color:var(--text2)">Unavailable</div>'
+      + '<div class="card-period" style="color:var(--red);font-size:10px">' + (result && result.msg ? result.msg : "") + '</div></a>';
   }
-  var val = result.data.value, prior = result.data.prior, period = result.data.period;
-  var chg = changeInfo(val, prior, ind);
+  var d = result.data, chg = changeInfo(d.value, d.prior, ind);
   return '<a class="card" href="' + ind.url + '" target="_blank" rel="noopener">'
-    + badge
-    + '<div class="card-label">' + ind.label + '</div>'
-    + '<div class="card-value">' + formatValue(val, ind) + '</div>'
-    + '<div class="card-period">' + formatPeriod(period) + '</div>'
-    + '<div class="card-change ' + chg.cls + '">' + chg.label + '</div>'
-    + '</a>';
+    + badge + '<div class="card-label">' + ind.label + '</div>'
+    + '<div class="card-value">' + formatVal(d.value, ind) + '</div>'
+    + '<div class="card-period">' + (d.period || "") + '</div>'
+    + '<div class="card-change ' + chg.cls + '">' + chg.label + '</div></a>';
 }
 
 function renderGrids(results) {
   Object.keys(SECTIONS).forEach(function(sec) {
-    var gridId = SECTIONS[sec];
-    var cards = INDICATORS.filter(function(i){ return i.section === sec; });
-    document.getElementById(gridId).innerHTML = cards.map(function(ind){
+    var inds = INDICATORS.filter(function(i) { return i.section === sec; });
+    document.getElementById(SECTIONS[sec]).innerHTML = inds.map(function(ind) {
       return results[ind.id] !== undefined ? renderCard(ind, results[ind.id]) : skeletonCard();
     }).join("");
   });
 }
 
+async function fetchIndicator(ind) {
+  var sys = "You are a macroeconomic data assistant. Respond ONLY with a valid JSON object — no markdown, no code fences, no explanation.";
+  var res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": API_KEY,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true"
+    },
+    body: JSON.stringify({model:"claude-haiku-4-5-20251001", max_tokens:150, system:sys,
+      messages:[{role:"user", content:ind.prompt}]})
+  });
+  if (!res.ok) {
+    var e = await res.json().catch(function(){return{};});
+    throw new Error(e.error && e.error.message ? e.error.message : "HTTP " + res.status);
+  }
+  var d = await res.json();
+  var txt = d.content.filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("").trim();
+  try { return JSON.parse(txt); } catch(e1) {}
+  var m = txt.match(/\{[^{}]*\}/); if (m) { try { return JSON.parse(m[0]); } catch(e2) {} }
+  var m2 = txt.match(/\{[\s\S]*\}/); if (m2) { try { return JSON.parse(m2[0]); } catch(e3) {} }
+  throw new Error("Bad JSON: " + txt.slice(0,80));
+}
+
 async function loadAll() {
-  var results = {};
-  var loaded = 0;
+  var results = {}, loaded = 0;
   document.getElementById("status-dot").className = "dot loading";
   document.getElementById("status-text").textContent = "Loading indicators...";
   Object.keys(SECTIONS).forEach(function(sec) {
-    var cards = INDICATORS.filter(function(i){ return i.section === sec; });
-    document.getElementById(SECTIONS[sec]).innerHTML = cards.map(function(){ return skeletonCard(); }).join("");
+    var inds = INDICATORS.filter(function(i){return i.section===sec;});
+    document.getElementById(SECTIONS[sec]).innerHTML = inds.map(function(){return skeletonCard();}).join("");
   });
-
   for (var i = 0; i < INDICATORS.length; i++) {
     var ind = INDICATORS[i];
-    try {
-      var data = await fetchIndicator(ind);
-      results[ind.id] = { data: data, err: false };
-    } catch(e) {
-      results[ind.id] = { data: null, err: true, msg: e.message };
-    }
+    try { var data = await fetchIndicator(ind); results[ind.id] = {data:data, err:false}; }
+    catch(e) { results[ind.id] = {data:null, err:true, msg:e.message}; }
     loaded++;
-    document.getElementById("status-text").textContent = "Loading... " + loaded + "/" + INDICATORS.length;
+    document.getElementById("status-text").textContent = "Loading... " + loaded + "/10";
     renderGrids(results);
   }
-
-  var errCount = Object.values(results).filter(function(r){ return r.err; }).length;
-  document.getElementById("status-dot").className = errCount > 0 ? "dot error" : "dot";
-  document.getElementById("status-text").textContent = errCount === 0
-    ? "All " + INDICATORS.length + " indicators loaded — " + new Date().toLocaleTimeString()
-    : (INDICATORS.length - errCount) + "/" + INDICATORS.length + " loaded — " + errCount + " failed — " + new Date().toLocaleTimeString();
+  var errs = Object.values(results).filter(function(r){return r.err;}).length;
+  document.getElementById("status-dot").className = "dot" + (errs > 0 ? " error" : "");
+  document.getElementById("status-text").textContent = (errs === 0 ? "All 10 loaded" : (10-errs) + "/10 loaded") + " — " + new Date().toLocaleTimeString();
+  document.getElementById("last-updated").textContent = "Last refreshed " + new Date().toLocaleString() + ".";
 }
 
 window.addEventListener("load", function() {
-  try {
-    var saved = localStorage.getItem("fred_api_key");
-    if (saved) {
-      FRED_KEY = saved;
-      document.getElementById("key-screen").style.display = "none";
-      document.getElementById("dashboard").style.display = "block";
-      loadAll();
-    }
-  } catch(e) {}
+  try { var k = localStorage.getItem("anthro_key"); if (k) { API_KEY = k; document.getElementById("key-screen").style.display="none"; document.getElementById("dashboard").style.display="block"; loadAll(); } } catch(e) {}
 });
-
-document.getElementById("api-key-input").addEventListener("keydown", function(e) {
-  if (e.key === "Enter") submitKey();
-});
+document.getElementById("api-key-input").addEventListener("keydown", function(e){if(e.key==="Enter")submitKey();});
 </script>
 </body>
 </html>
